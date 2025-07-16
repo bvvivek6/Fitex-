@@ -12,12 +12,16 @@ app.use("/api/workout", require("./routes/workout"));
 
 const PORT = process.env.PORT || 5000;
 
-mongoose
-  .connect(process.env.MONGO_URI, {
+try {
+  const connect = await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  })
-  .then(() => {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => console.error(err));
+  });
+  console.log("Connected to MongoDB");
+} catch (err) {
+  console.error("Failed to connect to MongoDB:", err);
+}
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

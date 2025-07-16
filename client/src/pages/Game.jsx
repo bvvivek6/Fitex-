@@ -55,12 +55,12 @@ const Game = ({ token }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-50 flex flex-col items-center justify-start p-0">
+    <div className="relative min-h-screen flex flex-col items-center justify-start p-0">
       <div className="w-full flex flex-col items-center pt-8">
         <h2 className="text-3xl font-bold mb-4 text-center">
           Jump to Play Dino!
         </h2>
-        <div className="rounded-xl shadow-lg bg-white flex flex-col items-center justify-center p-4">
+        <div className="rounded-xl  bg-white flex flex-col items-center justify-center p-4">
           <iframe
             id="dino-iframe"
             src="/dino/index.html"
@@ -83,7 +83,7 @@ const Game = ({ token }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4  bg-white rounded-lg shadow-lg p-4 min-w-[180px]">
+        <div className="flex flex-col gap-2 mt-4  bg-white rounded-lg  p-4 min-w-[180px]">
           <div className="text-lg font-semibold text-gray-700">Stats</div>
           <div className="flex flex-col gap-1">
             <div className="text-blue-600 font-bold">Reps: {reps}</div>

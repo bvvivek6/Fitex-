@@ -1,5 +1,4 @@
-// API utility for making requests to backend
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 export async function login(username, password) {
   const res = await fetch(`${API_URL}/auth/login`, {
@@ -32,7 +31,7 @@ export async function logWorkout(token, type, reps, calories) {
 }
 
 export async function getMyWorkouts(token) {
-  const res = await fetch(`${API_URL}/workout/my`, {
+  const res = await fetch(`${API_URL}/workout/me`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res.json();
