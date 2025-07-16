@@ -8,13 +8,22 @@ const Home = () => (
       Real-time fitness tracker & game using AI pose detection
     </p>
     <div className="flex gap-4">
-      <Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <Link
+        to="/login"
+        className="bg-blue-500 text-white px-4 py-2 rounded-full"
+      >
         Login
       </Link>
-      <Link to="/signup" className="bg-green-500 text-white px-4 py-2 rounded">
+      <Link
+        to="/signup"
+        className="bg-green-500 text-white px-4 py-2 rounded-full"
+      >
         Sign Up
       </Link>
-      <Link to="/game" className="bg-purple-500 text-white px-4 py-2 rounded">
+      <Link
+        to="/game"
+        className="bg-purple-500 text-white px-4 py-2 rounded-full"
+      >
         Try Game
       </Link>
     </div>

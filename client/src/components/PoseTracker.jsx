@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from "react";
 import * as mpPose from "@mediapipe/pose";
 import * as cam from "@mediapipe/camera_utils";
 
-let lastY = null;
+let lastShoulderY = null;
+let jumpActive = false;
 
 const PoseTracker = ({ onJump, onSquat, onPose, highlightShoulder }) => {
   const videoRef = useRef(null);
@@ -45,7 +46,6 @@ const PoseTracker = ({ onJump, onSquat, onPose, highlightShoulder }) => {
           onPose(results.poseLandmarks);
         }
         if (highlightShoulder) {
-          // Draw left and right shoulder as circles
           const left = results.poseLandmarks[11];
           const right = results.poseLandmarks[12];
           if (left) {
@@ -71,14 +71,24 @@ const PoseTracker = ({ onJump, onSquat, onPose, highlightShoulder }) => {
   }, []);
 
   function detectMovements(landmarks) {
-    const leftAnkle = landmarks[mpPose.POSE_LANDMARKS.LEFT_ANKLE].y;
-    const rightAnkle = landmarks[mpPose.POSE_LANDMARKS.RIGHT_ANKLE].y;
-    const avgAnkleY = (leftAnkle + rightAnkle) / 2;
-    if (lastY !== null && lastY - avgAnkleY > 0.1) {
-      window.dispatchEvent(new KeyboardEvent("keydown", { key: " " }));
-      if (typeof onJump === "function") onJump();
+    // Use shoulders
+    const leftShoulder = landmarks[mpPose.POSE_LANDMARKS.LEFT_SHOULDER].y;
+    const rightShoulder = landmarks[mpPose.POSE_LANDMARKS.RIGHT_SHOULDER].y;
+    const avgShoulderY = (leftShoulder + rightShoulder) / 2;
+    //jump threshold
+    const jumpThreshold = 0.04;
+    if (lastShoulderY !== null) {
+      // trigger when jumped over threshold
+      if (!jumpActive && lastShoulderY - avgShoulderY > jumpThreshold) {
+        jumpActive = true;
+        if (typeof onJump === "function") onJump();
+      }
+      // Reset jump state if shoulders drop back down
+      if (jumpActive && avgShoulderY > lastShoulderY - jumpThreshold / 2) {
+        jumpActive = false;
+      }
     }
-    lastY = avgAnkleY;
+    lastShoulderY = avgShoulderY;
   }
 
   return (

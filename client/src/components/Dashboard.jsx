@@ -18,7 +18,6 @@ const Dashboard = ({ token }) => {
     }
   }, [token]);
 
-  // Prepare data for chart
   const chartData = workouts.map((w) => ({
     date: new Date(w.date).toLocaleDateString(),
     calories: w.calories,

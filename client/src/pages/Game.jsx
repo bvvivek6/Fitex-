@@ -17,8 +17,21 @@ const Game = ({ token }) => {
     const iframe = document.getElementById("dino-iframe");
     if (iframe && iframe.contentWindow) {
       iframe.contentWindow.focus();
-      // Use postMessage to communicate with the iframe
+      // Try postMessage (for custom integration)
       iframe.contentWindow.postMessage({ type: "JUMP" }, "*");
+
+      try {
+        const event = new KeyboardEvent("keydown", {
+          key: " ",
+          keyCode: 32,
+          which: 32,
+          code: "Space",
+          bubbles: true,
+        });
+        iframe.contentWindow.document.dispatchEvent(event);
+      } catch (e) {
+        console.error("Failed to send jump event to iframe:", e);
+      }
     }
   };
 
@@ -31,7 +44,6 @@ const Game = ({ token }) => {
 
   const [shoulder, setShoulder] = useState(null);
 
-  // Custom handler to get pose landmarks from PoseTracker
   const handlePose = (landmarks) => {
     if (landmarks && landmarks.length > 0) {
       // 11: left shoulder, 12: right shoulder in MediaPipe
