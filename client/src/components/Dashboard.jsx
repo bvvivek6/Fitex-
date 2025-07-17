@@ -26,30 +26,69 @@ const Dashboard = ({ token }) => {
   }));
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Workout Analytics</h2>
-      <div className="bg-white rounded shadow p-4 mb-6">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chartData}>
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="calories" fill="#38bdf8" name="Calories Burned" />
-          </BarChart>
-        </ResponsiveContainer>
+    <div className="min-h-screen bg-black font-grotesk tracking-tight p-6">
+      {/* Subtle background */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute inset-0 bg-orange-500/5"></div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-blue-100 rounded p-4 text-center">
-          <div className="text-3xl font-bold">
-            {workouts.reduce((a, w) => a + w.reps, 0)}
-          </div>
-          <div>Total Reps</div>
+
+      <div className="relative max-w-7xl mx-auto">
+        <div className="mb-12">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Workout <span className="text-orange-500">Analytics</span>
+          </h2>
+          <p className="text-gray-400 text-lg font-light">
+            Track your fitness progress over time
+          </p>
         </div>
-        <div className="bg-green-100 rounded p-4 text-center">
-          <div className="text-3xl font-bold">
-            {workouts.reduce((a, w) => a + w.calories, 0).toFixed(1)}
+
+        <div className="bg-white/[0.02] border border-white/10 backdrop-blur-sm rounded-3xl p-8 mb-8">
+          <h3 className="text-xl font-bold text-white mb-6 tracking-tight">
+            Calories Burned Over Time
+          </h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={chartData}>
+              <XAxis
+                dataKey="date"
+                stroke="#9CA3AF"
+                fontSize={12}
+                fontFamily="inherit"
+              />
+              <YAxis stroke="#9CA3AF" fontSize={12} fontFamily="inherit" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "rgba(0, 0, 0, 0.8)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  borderRadius: "12px",
+                  color: "white",
+                  fontFamily: "inherit",
+                }}
+              />
+              <Bar
+                dataKey="calories"
+                fill="#f97316"
+                name="Calories Burned"
+                radius={[4, 4, 0, 0]}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white/[0.02] border border-white/10 backdrop-blur-sm rounded-3xl p-8 text-center group hover:scale-[1.02] transition-transform duration-300">
+            <div className="text-5xl font-black text-orange-500 mb-3 tracking-tight group-hover:scale-110 transition-transform duration-300">
+              {workouts.reduce((a, w) => a + w.reps, 0)}
+            </div>
+            <div className="text-gray-400 text-lg font-medium">Total Reps</div>
           </div>
-          <div>Total Calories</div>
+          <div className="bg-white/[0.02] border border-white/10 backdrop-blur-sm rounded-3xl p-8 text-center group hover:scale-[1.02] transition-transform duration-300">
+            <div className="text-5xl font-black text-orange-500 mb-3 tracking-tight group-hover:scale-110 transition-transform duration-300">
+              {workouts.reduce((a, w) => a + w.calories, 0).toFixed(1)}
+            </div>
+            <div className="text-gray-400 text-lg font-medium">
+              Total Calories
+            </div>
+          </div>
         </div>
       </div>
     </div>

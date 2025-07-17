@@ -29,23 +29,41 @@ function App() {
 
   return (
     <Router>
-      <nav className="flex gap-4 p-4 bg-white shadow">
-        <a href="/" className="font-bold">
+      <nav className="flex justify-between gap-4 mx-8 mt-2 p-4 font-grotesk bg-black bg-opacity-50 backdrop-blur-md shadow-md text-white">
+        <a
+          href="/"
+          className="font-bold text-lg text-orange-500 hover:text-orange-400"
+        >
           FitEx
         </a>
-        <a href="/game">Game</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/profile">Profile</a>
-        {token ? (
-          <button onClick={handleLogout} className="ml-auto text-red-500">
-            Logout
-          </button>
-        ) : (
-          <>
-            <a href="/login">Login</a>
-            <a href="/signup">Sign Up</a>
-          </>
-        )}
+        <div className="flex items-center gap-4">
+          <a href="/game" className="hover:text-orange-400">
+            Game
+          </a>
+          <a href="/dashboard" className="hover:text-orange-400">
+            Dashboard
+          </a>
+          <a href="/profile" className="hover:text-orange-400">
+            Profile
+          </a>
+          {token ? (
+            <button
+              onClick={handleLogout}
+              className="ml-auto text-red-500 hover:text-red-400"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <a href="/login" className="hover:text-orange-400">
+                Login
+              </a>
+              <a href="/signup" className="hover:text-orange-400">
+                Sign Up
+              </a>
+            </>
+          )}
+        </div>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />

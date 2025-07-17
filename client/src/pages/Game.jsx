@@ -55,26 +55,25 @@ const Game = ({ token }) => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-start p-0">
+    <div className="relative min-h-screen flex font-grotesk flex-col bg-black items-center justify-start p-0">
       <div className="w-full flex flex-col items-center pt-8">
-        <h2 className="text-3xl font-bold mb-4 text-center">
+        <h2 className="text-3xl font-medium text-orange-400 mb-4 text-center">
           Jump to Play Dino!
         </h2>
-        <div className="rounded-xl  bg-white flex flex-col items-center justify-center p-4">
+        <div className="rounded-xl flex flex-col items-center justify-center p-4">
           <iframe
             id="dino-iframe"
             src="/dino/index.html"
             width="700"
             height="220"
             title="Dino Game"
-            className="rounded border border-gray-200 shadow"
-            style={{ background: "#f7f7f7" }}
+            className="rounded-2xl border border-[#2a2a2a] p-4 "
           ></iframe>
         </div>
       </div>
 
-      <div className="flex flex-row items-end gap-4 z-50">
-        <div className="relative aspect-video w-[400px] bg-black rounded-lg shadow-lg overflow-hidden flex items-center ">
+      <div className="flex flex-row  gap-4 z-50">
+        <div className="relative aspect-video w-[400px] bg-white rounded-lg shadow-lg overflow-hidden flex items-center ">
           <PoseTracker
             onJump={handleJump}
             onPose={handlePose}
@@ -83,18 +82,13 @@ const Game = ({ token }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-2 mt-4  bg-white rounded-lg  p-4 min-w-[180px]">
+        <div className="flex flex-col gap-2 border border-[#2a2a2a] bg-black rounded-lg p-2 h-full min-w-[180px]">
           <div className="flex flex-col gap-1">
             <div className="text-blue-600 font-bold">Reps: {reps}</div>
             <div className="text-green-600 font-bold">
               Calories: {calories.toFixed(2)}
             </div>
-            <button
-              onClick={handleSave}
-              className="mt-2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-            >
-              Save Workout
-            </button>
+
             {message && (
               <div className="text-xs text-center text-gray-500 mt-1">
                 {message}
@@ -103,7 +97,7 @@ const Game = ({ token }) => {
           </div>
 
           <div className="mt-2 text-xs text-gray-500">
-            <div className="font-bold text-gray-700 mb-1">Shoulders</div>
+            <div className="font-medium text-gray-400 mb-1">Shoulders</div>
             {shoulder ? (
               <>
                 <div>
@@ -119,6 +113,12 @@ const Game = ({ token }) => {
               <div>No pose detected yet.</div>
             )}
           </div>
+          <button
+            onClick={handleSave}
+            className=" mt-6 bg-orange-500 text-white px-2 py-1  rounded hover:bg-orange-600 transition"
+          >
+            Save Workout
+          </button>
         </div>
       </div>
     </div>
