@@ -99,7 +99,7 @@ const PoseTracker = ({ onJump, onSquat, onPose, highlightShoulder }) => {
         width={640}
         height={480}
         className="absolute top-0 left-0 w-full h-full object-cover"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", transform: "scaleX(-1)" }}
       />
     </div>
   );

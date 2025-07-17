@@ -84,7 +84,6 @@ const Game = ({ token }) => {
         </div>
 
         <div className="flex flex-col gap-2 mt-4  bg-white rounded-lg  p-4 min-w-[180px]">
-          <div className="text-lg font-semibold text-gray-700">Stats</div>
           <div className="flex flex-col gap-1">
             <div className="text-blue-600 font-bold">Reps: {reps}</div>
             <div className="text-green-600 font-bold">
