@@ -32,20 +32,37 @@ export const UpdateWorkOut = async (req, res) => {
   const { id, type, reps, calories } = req.body;
 
   try {
-    const upadatedWork = await Workout.findByIdAndUpdate(
-      id,
-      {
-        type,
-        reps,
-        calories,
-      },
-      { new: true, runValidators: true }
-    );
-    if (!upadatedWork) {
+    const workout = await Workout.findById(id);
+    if (!workout) {
       return res.status(404).json({ message: "Workout not found" });
     }
-    //success
-    res.status(200).json(upadatedWork);
+
+    // Only update if new reps and calories are greater than current
+    if (
+      (typeof reps === "number" && reps > workout.reps) ||
+      (typeof calories === "number" && calories > workout.calories)
+    ) {
+      const updatedFields = {
+        type: type || workout.type,
+        reps:
+          typeof reps === "number" && reps > workout.reps ? reps : workout.reps,
+        calories:
+          typeof calories === "number" && calories > workout.calories
+            ? calories
+            : workout.calories,
+      };
+      const updatedWork = await Workout.findByIdAndUpdate(id, updatedFields, {
+        new: true,
+        runValidators: true,
+      });
+      return res
+        .status(200)
+        .json(updatedWork, { message: "Workout Updated! Keep Going!🫡" });
+    } else {
+      return res
+        .status(200)
+        .json(workout, { message: "Work harder to get update results!😉" });
+    }
   } catch (err) {
     res.status(500).json({
       message: err.message,
