@@ -1,0 +1,19 @@
+<!-- Fitex Logo: Fitness for Software Engineers -->
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laptop base -->
+  <rect x="10" y="36" width="44" height="12" rx="3" fill="#22223B"/>
+  <!-- Laptop screen -->
+  <rect x="16" y="16" width="32" height="22" rx="2" fill="#4A4E69"/>
+  <!-- Biceps (left) -->
+  <path d="M8 44 Q4 36 14 32" stroke="#9A8C98" stroke-width="4" fill="none"/>
+  <!-- Biceps (right) -->
+  <path d="M56 44 Q60 36 50 32" stroke="#9A8C98" stroke-width="4" fill="none"/>
+  <!-- Dumbbell (center, above laptop) -->
+  <rect x="28" y="10" width="8" height="6" rx="2" fill="#C9ADA7"/>
+  <rect x="26" y="12" width="2" height="2" rx="1" fill="#22223B"/>
+  <rect x="36" y="12" width="2" height="2" rx="1" fill="#22223B"/>
+  <!-- Code brackets on screen -->
+  <text x="22" y="30" font-family="monospace" font-size="10" fill="#F2E9E4">{'<>'}</text>
+  <!-- Tagline below -->
+  <text x="32" y="60" font-family="Arial" font-size="6" fill="#4A4E69" text-anchor="middle">Fitex</text>
+</svg>
